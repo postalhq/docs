@@ -86,3 +86,19 @@ oidc:
   secret: # your client secret from Google
   scopes: [openid, email]
 ```
+
+## Using Microsoft Entra ID as an identity provider
+
+Setting up Postal to authenticate with Entra ID (former Azure AD) is fairly straight forward. You'll need to use the Entra ID admin center for creating an app registration, which will get you an client ID and client secret ([see docs](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app)). When prompted for a redirect URI, you should be `https://postal.yourdomain.com/auth/oidc/callback`. The following configuration can be used to enable this:
+
+```yaml
+oidc:
+  enabled: true
+  name: Microsoft Entra ID
+  issuer: https://login.microsoftonline.com/{ENTER_YOUR_TENANT_ID}/v2.0
+  identifier: # your client ID from Entra App Registration
+  secret: # your client secret from Entra App Registration
+  scopes:
+    - openid
+    - email
+```
